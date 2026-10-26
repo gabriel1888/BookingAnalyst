@@ -2,6 +2,7 @@
 
 /* ================= Config — EDIT THESE before publishing ================= */
 const WEBHOOK_URL = 'https://hook.eu2.make.com/p5w6lk8xxh5q8hk8l9atw8ajkr7heuvu'; // Make.com scenario that receives leads
+const GA4_ID = 'G-SX0QJ6KN7D';  // Google Analytics 4 — live
 const SIGNUP_EMAIL = 'gabriel@fastechnologyhq.co.uk';  // where report requests & signups land
 const BOOKING_LINK = 'https://calendly.com/fas-technology'; // "Work with us" strategy-call booking link
 const BRAND_NAME = 'Fàs';                              // your brand, shown in the agency band & footer
@@ -820,6 +821,23 @@ function leadPayload(source, fields) {
   };
 }
 
+/* Usage tracking: silent until GA4_ID is set, then events flow to Google Analytics */
+function track(event, params) {
+  if (!GA4_ID || typeof window.gtag !== 'function') return;
+  window.gtag('event', event, params || {});
+}
+function loadAnalytics() {
+  if (!GA4_ID) return;
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', GA4_ID);
+}
+
 function setBusy(form, busy, busyText) {
   const btn = form.querySelector('button[type="submit"]');
   if (!btn) return;
@@ -909,6 +927,7 @@ function bindEvents() {
     renderChannelChips();
     buildQuickTable();
     recalc({ scroll: true });
+    track('example_loaded');
   });
 
   // No-show manual fields
@@ -965,6 +984,7 @@ function bindEvents() {
       $('#reportDone').hidden = false;
       $('#reportDone').classList.remove('warn');
       form.reset();
+      track('signup_submitted', { platform: $('#reportPlatform') ? $('#reportPlatform').value : '' });
     } catch {
       $('#reportDone').hidden = false;
       $('#reportDone').classList.add('warn');
@@ -996,6 +1016,7 @@ function bindEvents() {
       $('#savedDone').hidden = false;
       $('#savedDone').classList.remove('warn');
       form.reset();
+      track('saved_story_submitted', { monthlySaving: parseFloat($('#savedAmount').value) || 0 });
     } catch {
       $('#savedDone').hidden = false;
       $('#savedDone').classList.add('warn');
@@ -1044,6 +1065,7 @@ function bindEvents() {
       $('.install-steps').after(auto);
     }
     $('#installModal').hidden = false;
+    track('install_guide_opened');
   });
   const closeInstall = () => { $('#installModal').hidden = true; };
   $('#installClose').addEventListener('click', closeInstall);
@@ -1067,6 +1089,7 @@ function bindEvents() {
       try { document.execCommand('copy'); } catch { /* clipboard unavailable */ }
       ta.remove();
     }
+    track('share_clicked');
     const original = btn.textContent;
     btn.textContent = 'Link copied ✓'; btn.classList.add('copied');
     setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 2000);
@@ -1152,6 +1175,7 @@ function init() {
   bindEvents();
   initChrome();
   clearV2();
+  loadAnalytics();
 }
 
 init();
