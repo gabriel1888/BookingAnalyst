@@ -1,0 +1,13 @@
+{
+  "name": "Booking Fee Analyser",
+  "short_name": "Fee Analyser",
+  "description": "See how much your booking apps really take from you — and how to keep that money.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FAFAF7",
+  "theme_color": "#0e7c66",
+  "icons": [
+    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
