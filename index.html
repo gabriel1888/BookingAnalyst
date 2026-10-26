@@ -3,425 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Booking Fee Analyser — what do Fresha, Treatwell & co. really cost you?</title>
-<meta name="description" content="Paste your monthly or weekly booking rundown from Fresha, Treatwell, Booksy or any platform. See exactly what you pay in commissions, card fees and subscriptions — and get a personalised action plan to cut it.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e7c66'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='%23fff' text-anchor='middle'%3E%25%3C/text%3E%3C/svg%3E">
+<title>Is your salon visible to AI? — free 2-minute check</title>
+<meta name="description" content="When someone asks ChatGPT 'where's the best hairdresser near me?' — does your salon come up? Take the free 2-minute AI Visibility check and get your score plus your 3 fastest fixes.">
+<link rel="manifest" href="../manifest.json">
+<link rel="apple-touch-icon" href="../icon-180.png">
+<meta name="theme-color" content="#0e7c66">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bookinganalyst.com/visibility.html">
+<meta property="og:title" content="Is your salon visible to AI? — free 2-minute check">
+<meta property="og:description" content="When someone asks ChatGPT for a good salon nearby, does yours come up? Score your visibility and get your 3 fastest fixes.">
+<meta property="og:image" content="https://www.bookinganalyst.com/icon-512.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-180.png">
-<meta name="theme-color" content="#0e7c66">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Fee Analyser">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.bookinganalyst.com/">
-<meta property="og:title" content="What do your booking apps really take from you?">
-<meta property="og:description" content="Free tool for salon owners: see exactly how much Fresha, Treatwell and the rest keep every month — and the simple things to do to keep that money yourself.">
-<meta property="og:image" content="https://www.bookinganalyst.com/icon-512.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="What do your booking apps really take from you?">
-<meta name="twitter:description" content="Free tool for salon owners: see what the apps keep, and how to keep it yourself.">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 <body>
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#">
+    <a class="brand" href="../">
       <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0e7c66"/><text x="16" y="22" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">%</text></svg>
-      <span><span class="brand-long">Booking </span><em>Fee</em> Analyser</span>
+      <span>Booking <em>Fee</em> Analyser</span>
     </a>
     <nav class="nav-links">
-      <a href="#data" class="nav-flow">Start</a>
-      <a href="#results" class="nav-flow">Your numbers</a>
-      <a href="#actions" class="nav-flow">How to save</a>
-      <a href="visibility.html">AI Visibility</a>
+      <a href="../">Fee Analyser</a>
+      <a href="#quiz" class="active">AI Visibility</a>
       <a href="#agency">Work with us</a>
-      <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-right">
-    <button id="installBtn" class="install-btn" type="button" title="Add the Fee Analyser to your phone's home screen">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18.5h2"/></svg>
-      <span class="install-long">Add to Home Screen</span><span class="install-short">Get app</span>
-    </button>
-    <button id="shareBtn" class="share-btn" type="button" title="Copy a link to this tool"><span class="share-long">Spread the word</span><span class="share-short">Share</span></button>
+      <button id="shareBtn" class="share-btn" type="button" title="Copy a link to this check"><span class="share-long">Share this check</span><span class="share-short">Share</span></button>
     </div>
   </div>
 </header>
 
 <main>
 
-<!-- ============ HERO ============ -->
 <section class="hero">
   <div class="wrap">
-    <p class="hero-eyebrow">Free · takes 2 minutes · nothing to install</p>
-    <h1>How much do your booking apps <em>take</em> from you?</h1>
-    <p class="hero-sub">Tell us about your month. We'll show you exactly how much Fresha, Treatwell and the rest keep — and the simple things to do to keep that money yourself.</p>
-    <div class="hero-chips">
-      <span class="chip">Fresha</span><span class="chip">Treatwell</span><span class="chip">Booksy</span>
-      <span class="chip">Planity</span><span class="chip">Square</span><span class="chip">Vagaro</span>
-      <span class="chip">GlossGenius</span><span class="chip">StyleSeat</span><span class="chip chip-more">+ any platform</span>
-    </div>
+    <p class="hero-eyebrow">Free · takes 2 minutes · honest answers only</p>
+    <h1>Is your salon <em>visible to AI</em>?</h1>
+    <p class="hero-sub">When someone asks ChatGPT or Google "where's the best hairdresser near me?" — does your salon come up? Answer 10 quick questions and get your score plus the 3 fastest fixes.</p>
     <div class="hero-cta">
-      <a href="#data" class="btn primary btn-lg">Analyse my fees — free</a>
-      <p class="hero-cta-note">Takes under 2 minutes · nothing leaves your device</p>
+      <a href="#quiz" class="btn primary btn-lg">Start the check</a>
+      <p class="hero-cta-note">Nothing to install · works for any salon, any booking system · nothing leaves your device</p>
     </div>
-    <div class="hero-trust">
-      <div><strong>Private</strong><span>your numbers never leave this page</span></div>
-      <div><strong>Free</strong><span>no account, no card</span></div>
-      <div><strong>Simple</strong><span>just 3 questions, plain answers</span></div>
+    <div class="hero-switch">
+      Got here from the Booking Fee Analyser? This is the other half: <a href="../">check what the booking apps take from you →</a>
     </div>
-    <div class="hero-switch">Don't use a booking app? <a href="visibility.html">Check if AI can find your salon instead →</a></div>
   </div>
 </section>
 
-<!-- ============ STEP 1: DATA ============ -->
-<section id="data" class="step">
+<!-- ============ QUIZ ============ -->
+<section id="quiz" class="step">
   <div class="wrap">
     <div class="step-head">
       <span class="step-num">1</span>
       <div>
-        <h2>Tell us about your month</h2>
-        <p>Three quick questions. Your answers stay on this page — nothing is sent anywhere.</p>
+        <h2>10 quick questions</h2>
+        <p>Answer honestly — nobody sees this but you. "Not sure" counts as no.</p>
       </div>
     </div>
-
     <div class="card">
-      <div class="channel-pick">
-        <p class="pick-label">First: which apps do you use to get bookings? <span class="pick-sub">Add all of yours. If some people call, message or walk in, add "Booked direct" too.</span></p>
-        <div id="channelSearch" class="channel-search"><!-- V1 picker: filled by app.js --></div>
-        <div id="channelChips" class="chip-row" hidden><!-- V2 picker: filled by app.js --></div>
-      </div>
-      <div class="row-controls">
-        <div class="seg" role="tablist" aria-label="Input mode">
-          <button id="tabQuick" class="seg-btn active" role="tab" aria-selected="true">Type it in</button>
-          <button id="tabCsv" class="seg-btn" role="tab" aria-selected="false">Paste from a spreadsheet (optional)</button>
-        </div>
-        <div class="inline-controls">
-          <label class="inline-field">Is this for…
-            <select id="periodSel">
-              <option value="monthly" selected>A whole month</option>
-              <option value="weekly">One week</option>
-            </select>
-          </label>
-          <label class="inline-field">Your money
-            <select id="currencySel">
-              <option value="£" selected>£ pounds</option>
-              <option value="€">€ euros</option>
-              <option value="$">$ dollars</option>
-            </select>
-          </label>
-        </div>
-      </div>
-
-      <!-- Quick add panel (primary path) -->
-      <div id="panelQuick" class="panel">
-        <p class="hint">For each app: roughly how many bookings you got, and roughly what a usual job costs. Guessing is fine.</p>
-        <div class="quick-table-wrap">
-          <table class="quick-table" id="quickTable">
-            <thead><tr><th>App</th><th>How many bookings?</th><th>Usual price</th><th class="ta-r">Money in</th></tr></thead>
-            <tbody><!-- filled by app.js --></tbody>
-          </table>
-        </div>
-        <p id="quickTotal" class="feedback"></p>
-        <div class="btn-row"><button id="quickExample" class="btn ghost small">Not sure? Show me an example</button></div>
-      </div>
-
-      <!-- CSV panel (optional) -->
-      <div id="panelCsv" class="panel" hidden>
-        <p class="hint">Have a list of bookings from your app's reports page? Paste it here — we'll read it for you. Not sure how? Just use "Type it in" above instead.</p>
-        <textarea id="csvInput" spellcheck="false" placeholder="Date, Client, Service, Source, Status, Price&#10;2026-10-01, Ana M, Blow dry, Treatwell, Paid, 45&#10;2026-10-02, Lee S, Massage, Fresha, Paid, 60&#10;2026-10-03, Kim T, Cut &amp; finish, Fresha (own link), Paid, 55&#10;…"></textarea>
-        <div class="btn-row">
-          <button id="analyseBtn" class="btn primary">Show me my numbers</button>
-          <label class="btn ghost file-btn">Choose a file<input type="file" id="fileInput" accept=".csv,.txt,text/csv,text/plain"></label>
-          <button id="exampleBtn" class="btn ghost">Try an example</button>
-          <button id="clearBtn" class="btn ghost">Erase</button>
-        </div>
-        <p id="parseFeedback" class="feedback" hidden></p>
-        <details class="subnote">
-          <summary>Tips for pasting (optional)</summary>
-          <ul>
-            <li>Any list with prices works. If you can, add a <em>Source</em> column saying where each booking came from (Fresha, Treatwell, walk-in…).</li>
-            <li>Bookings that never happened — mark the Status "No show" or "Cancelled" and we'll leave them out.</li>
-            <li>Short lines work too, like <code>45, Treatwell</code>.</li>
-          </ul>
-        </details>
-      </div>
-
-      <details class="adv-details">
-        <summary>Extra settings (you probably don't need these)</summary>
-        <div class="adv-grid">
-          <label class="inline-field">How many customers pay by card? (%)
-            <input type="number" id="cardShare" min="0" max="100" step="5" value="100">
-          </label>
-          <label class="inline-field">Text reminders per booking
-            <input type="number" id="smsPerBooking" min="0" max="5" step="0.5" value="1">
-          </label>
-          <label class="inline-field">No-shows per <span class="period-word">month</span>
-            <input type="number" id="nsCount" min="0" step="1" value="0">
-          </label>
-          <label class="inline-field">Usual price of a no-show
-            <input type="number" id="nsTicket" min="0" step="1" value="0">
-          </label>
-        </div>
-        <p class="disclaimer-note">The app fee numbers we use are typical ones — you can check and change them in step 2.</p>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ STEP 2: RATES ============ -->
-<section id="rates" class="step">
-  <div class="wrap">
-    <div class="step-head">
-      <span class="step-num">2</span>
-      <div>
-        <h2>What the apps charge</h2>
-        <p>We've filled in typical numbers, so you don't have to. Know your exact rates? Check them here.</p>
+      <div id="quizList" class="quiz-list"><!-- filled by visibility.js --></div>
+      <div class="quiz-progress"><div class="quiz-progress-fill" id="quizProgress"></div></div>
+      <div class="btn-row">
+        <button id="scoreBtn" class="btn primary btn-lg" type="button" disabled>Answer all 10 to see my score</button>
+        <button id="quizReset" class="btn ghost" type="button" hidden>Start again</button>
       </div>
     </div>
-    <details class="adv-details rates-details">
-      <summary>Show the fee numbers we used (optional)</summary>
-      <div id="rateCards" class="rate-grid"><!-- filled by app.js --></div>
-      <p class="disclaimer-note">These are typical prices and they change now and then — check with your app to be sure.</p>
-    </details>
   </div>
 </section>
 
 <!-- ============ RESULTS ============ -->
-<section id="results" class="step" hidden>
+<section id="result" class="step" hidden>
   <div class="wrap">
     <div class="step-head">
-      <span class="step-num">3</span>
+      <span class="step-num">2</span>
       <div>
-        <h2>Your numbers</h2>
-        <p>All the amounts below are for one <strong>month</strong>.</p>
+        <h2>Your visibility score</h2>
+        <p>Here's how easy it is for people — and AI — to find you today.</p>
       </div>
     </div>
 
-    <div class="kpi-grid" id="kpiGrid"></div>
+    <div class="card score-card">
+      <div class="score-num-wrap">
+        <div class="score-num" id="scoreNum">0</div>
+        <div class="score-outof">out of 100</div>
+      </div>
+      <div class="score-verdict">
+        <h3 id="scoreTier"></h3>
+        <p id="scoreBlurb"></p>
+        <div class="bar-track score-bar"><div class="bar-fill" id="scoreBar" style="background:var(--accent)"></div></div>
+      </div>
+    </div>
 
     <div class="card">
-      <h3 class="card-title">Where it all goes</h3>
-      <div class="table-wrap">
-        <table class="data-table" id="channelTable">
-          <thead><tr>
-            <th>App</th><th class="ta-r">Bookings</th><th class="ta-r">Money in</th>
-            <th class="ta-r">They took</th><th class="ta-r">Their cut</th>
-          </tr></thead>
-          <tbody><!-- filled --></tbody>
-        </table>
-      </div>
-      <div id="channelBars" class="bars"></div>
-      <p class="bar-legend">Each bar is one app. The striped part on the left is what the app keeps. The exact numbers are in the table above.</p>
-      <details class="subnote">
-        <summary>How we worked this out</summary>
-        <ul id="assumptionsList"></ul>
-      </details>
+      <h3 class="card-title">Your 3 fastest fixes</h3>
+      <div id="fixList" class="fix-list"></div>
     </div>
-  </div>
-</section>
 
-<!-- ============ SIMULATOR ============ -->
-<section id="simulate" class="step" hidden>
-  <div class="wrap">
-    <div class="step-head">
-      <span class="step-num">4</span>
-      <div>
-        <h2>What if some customers booked you directly?</h2>
-        <p>Apps charge you every time they send you a customer. Customers who book you directly are free. Drag the slider to see the difference.</p>
-      </div>
-    </div>
-    <div class="card sim-card">
-      <div class="sim-controls">
-        <label class="sim-slider">
-          <span>App customers who start booking direct: <strong id="convVal">25%</strong></span>
-          <input type="range" id="convSlider" min="0" max="100" step="5" value="25">
-        </label>
-        <label class="sim-slider">
-          <span>You thank them with a small discount: <strong id="discVal">0%</strong></span>
-          <input type="range" id="discSlider" min="0" max="20" step="1" value="0">
-        </label>
-      </div>
-      <div class="sim-result" id="simResult"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ DIY BOOKING PAGE ============ -->
-<section id="diy" class="step" hidden>
-  <div class="wrap">
-    <div class="step-head">
-      <span class="step-num">5</span>
-      <div>
-        <h2>What if you ran your own booking page?</h2>
-        <p>For customers who book you directly, you don't need an app at all. Here's what it would cost — and what you'd keep.</p>
-      </div>
-    </div>
-    <div class="card diy-card">
-      <div class="diy-costs">
-        <h3 class="card-title">What it costs</h3>
-        <ul class="diy-list">
-          <li><strong>Your own web address</strong><span>about £1 a month (£12 a year)</span></li>
-          <li><strong>A booking page</strong><span>£0 — free tools do this well</span></li>
-          <li><strong>Card payments</strong><span>the same small fee you already pay</span></li>
-          <li><strong>Setup time</strong><span>about an hour, once</span></li>
-        </ul>
-        <div class="diy-cta">
-          <a id="diyBook" class="btn gold small" target="_blank" rel="noopener">We can set it all up for you — free call</a>
-        </div>
-      </div>
-      <div class="diy-save">
-        <div class="sim-line"><span>What the apps take today</span><strong id="diyToday"></strong></div>
-        <div class="sim-line"><span>What your own page would cost</span><strong id="diyCost"></strong></div>
-        <div class="sim-saving">
-          <div class="big" id="diySaving"></div>
-          <div class="sub" id="diySavingSub"></div>
-        </div>
-        <p class="diy-note">Apps are still worth it for finding <em>new</em> customers — your own page is for the regulars. See the slider above for a realistic halfway number.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ACTIONS ============ -->
-<section id="actions" class="step" hidden>
-  <div class="wrap">
-    <div class="step-head">
-      <span class="step-num">6</span>
-      <div>
-        <h2>How to save that money</h2>
-        <p>Simple things to do, starting with the one that saves the most. We tell you exactly what to say.</p>
-      </div>
-    </div>
-    <div id="actionList" class="action-list"></div>
-  </div>
-</section>
-
-<!-- ============ GET FOUND (AI + FRESHA) ============ -->
-<section id="getfound" class="step">
-  <div class="wrap">
-    <div class="step-head">
-      <span class="step-num">7</span>
-      <div>
-        <h2>Get found by more people</h2>
-        <p>Saving fees is half the story — here's how new people find you in the first place, on AI and in the app.</p>
-      </div>
-    </div>
-    <div class="found-grid">
-      <div class="found-card">
-        <h3>When people ask AI 💬</h3>
-        <p class="found-sub">More and more people ask ChatGPT or Google things like "where's a good hairdresser near me?" Here's how to be the answer:</p>
-        <ol>
-          <li>Claim and complete your <strong>Google Business Profile</strong> — photos, opening hours, services, prices.</li>
-          <li>Collect <strong>fresh Google reviews</strong> — ask happy customers, and always reply to them.</li>
-          <li>Get listed on <strong>local directories</strong> — Yell, Facebook, and yes, Treatwell — AI tools read them all.</li>
-          <li>Say your <strong>services and your town</strong> clearly everywhere — AI recommends what it can understand.</li>
-        </ol>
-      </div>
-      <div class="found-card">
-        <h3>Inside the Fresha app 📲</h3>
-        <p class="found-sub">When someone searches in Fresha, they see a ranked list. You rank higher when you:</p>
-        <ol>
-          <li>Keep your profile <strong>complete with good photos</strong> — profiles with photos get booked far more.</li>
-          <li><strong>Leave slots open</strong> — an empty-looking calendar ranks lower and gets fewer taps.</li>
-          <li><strong>Reply fast</strong> to new requests — response speed counts.</li>
-          <li>Keep <strong>prices clear</strong> and collect a review in the app after every visit.</li>
-        </ol>
-      </div>
-    </div>
-    <p class="found-cta">This is exactly what our <strong>Local Visibility</strong> service does for salons — <a id="foundBook" target="_blank" rel="noopener">book a free call</a> and we'll do it with you.</p>
-  </div>
-</section>
-
-<!-- ============ SAVED MONEY / CASE STUDY ============ -->
-<section id="saved" class="step">
-  <div class="wrap">
-    <div class="saved-card">
-      <div class="saved-head">
-        <p class="saved-eyebrow">Your win</p>
-        <h2>Saved money? We'd love to hear.</h2>
-        <p class="saved-sub">If our numbers helped you keep a bit more of your money, tell us how much. We feature our favourite stories — only with your permission — and they help other salon owners take the leap.</p>
-      </div>
-      <form id="savedForm">
-        <input type="text" id="savedHp" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="saved-grid">
-          <label class="inline-field">First name
-            <input type="text" id="savedName" placeholder="Ana" required>
-          </label>
-          <label class="inline-field">Salon / business name
-            <input type="text" id="savedBusiness" placeholder="Ana's Hair Studio">
-          </label>
-        </div>
-        <label class="inline-field">Email
-          <input type="email" id="savedEmail" placeholder="you@yoursalon.com" required>
-        </label>
-        <label class="inline-field">What worked?
-          <select id="savedAction">
-            <option>Asking app customers to book direct</option>
-            <option>Charging app customers a little more</option>
-            <option>Deposits for no-shows</option>
-            <option>Free reminders (WhatsApp or email)</option>
-            <option>Cancelled subscriptions I didn't use</option>
-            <option>Selling prepaid bundles</option>
-            <option>Something else</option>
-          </select>
-        </label>
-        <div class="saved-grid">
-          <label class="inline-field">Roughly how much are you saving each month?
-            <input type="number" id="savedAmount" min="0" placeholder="120" required>
-          </label>
-          <label class="inline-field">Your story, in a sentence (optional)
-            <input type="text" id="savedQuote" placeholder="My regulars all book direct now…">
-          </label>
-        </div>
-        <label class="consent-row"><input type="checkbox" id="savedConsent" checked> You can feature my story (first name and salon only). Unsubscribe anytime.</label>
-        <button type="submit" class="btn primary saved-btn">Send my savings story</button>
-        <p id="savedDone" class="feedback ok" hidden>Thank you! If it's a good one, we'll be in touch about featuring it.</p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- ============ MONTHLY REPORT SIGNUP ============ -->
-<section id="report" class="step">
-  <div class="wrap">
-    <div class="report-card">
+    <div class="report-card" id="visibilityCapture">
       <div class="report-copy">
-        <p class="report-eyebrow">We do it for you</p>
-        <h2>A report in your inbox, every month</h2>
-        <p class="report-sub">Each month, we check what your apps charged you and send you a short, clear report: what changed, what crept up, and the 3 things to do this month to keep more money. Start with your first report free — no card needed.</p>
-        <ul class="report-points">
-          <li><strong>Every fee, written out</strong> — for every app you use</li>
-          <li><strong>Month-by-month tracking</strong> — spot it straight away if an app starts taking more</li>
-          <li><strong>3 things to do this month</strong> — simple steps, biggest savings first</li>
-          <li><strong>Price-rise alerts</strong> — if an app quietly starts charging more, you'll know</li>
-        </ul>
-        <p class="report-price"><strong>£12</strong>/month <span>· your first report free · cancel anytime</span></p>
+        <p class="report-eyebrow">Free — no card needed</p>
+        <h2>Want the full report on everything we found?</h2>
+        <p class="report-sub">Leave your email and we'll send you a free personalised write-up: what's missing, what it's costing you, and the exact steps to fix each one — written in plain English.</p>
+        <p class="report-price"><strong>Free</strong><span>· because we'd rather show you than tell you</span></p>
       </div>
       <div class="report-form">
-        <form id="reportForm">
-          <input type="text" id="reportHp" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <label class="inline-field">Your name
-            <input type="text" id="reportName" placeholder="Ana" required>
+        <form id="visForm">
+          <input type="text" id="visHp" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="inline-field">First name
+            <input type="text" id="visName" placeholder="Ana" required>
           </label>
-          <label class="inline-field">Your email
-            <input type="email" id="reportEmail" placeholder="you@yoursalon.com" required>
+          <label class="inline-field">Salon / business name
+            <input type="text" id="visBusiness" placeholder="Ana's Hair Studio">
           </label>
-          <label class="inline-field">Which platform do you use most?
-            <select id="reportPlatform">
-              <option>Fresha</option><option>Treatwell</option><option>Booksy</option>
-              <option>Planity</option><option>Square</option><option>Vagaro</option>
-              <option>GlossGenius</option><option>StyleSeat</option><option>Other / several</option>
-            </select>
+          <label class="inline-field">Email
+            <input type="email" id="visEmail" placeholder="you@yoursalon.com" required>
           </label>
-          <button type="submit" class="btn primary report-btn">Start free — then £12/month</button>
-          <label class="consent-row"><input type="checkbox" id="reportConsent" checked> Email me each monthly report, and the payment link. Unsubscribe anytime.</label>
-          <p id="reportDone" class="feedback ok" hidden>You're on the list! We'll email you within a day to set up payment — remember, your first report is free. If anything goes wrong, email us at <span class="report-addr"></span>.</p>
+          <label class="consent-row"><input type="checkbox" id="visConsent" checked> Email me my free report and occasional salon-profit tips. Unsubscribe anytime.</label>
+          <button type="submit" class="btn primary report-btn">Send me my free visibility report</button>
+          <p id="visDone" class="feedback ok" hidden>Got it! Your report is on its way — check your inbox within 48 hours. If anything goes wrong, email us at <span class="vis-addr"></span>.</p>
         </form>
       </div>
+    </div>
+
+    <div class="found-cta agency-line">This check is the first half of our <strong>Local Visibility</strong> service — we do all of it for you, every month. <a id="visBook" target="_blank" rel="noopener">Book a free call</a> if you'd rather get on with your clients.</p>
+    </div>
+
+    <div class="card switch-card">
+      <p><strong>One more thing worth knowing:</strong> if you use Fresha, Treatwell or any booking app, they're quietly taking a cut of every booking. <a href="../">Check what the apps take from you →</a></p>
     </div>
   </div>
 </section>
@@ -431,53 +144,12 @@
   <div class="wrap">
     <div class="agency-band">
       <p class="agency-eyebrow" id="agencyBrand"></p>
-      <h2>This tool finds the leaks. We fix them for you.</h2>
-      <p class="agency-sub">Everything we suggested above — getting customers to book direct, setting up deposits, reminding people the free way — is what we set up for salons every day. If you'd rather spend your time with your customers than fighting app settings, we'll do it for you.</p>
-      <div class="agency-points">
-        <div><strong>Your own booking page</strong><span>A simple page where customers book you directly — no app taking a cut.</span></div>
-        <div><strong>Messages that bring people back</strong><span>We remind your customers to rebook, so they become regulars who book direct.</span></div>
-        <div><strong>Being easy to find</strong><span>We help people nearby find you on Google — and book you directly.</span></div>
-      </div>
+      <h2>We make salons easy to find — everywhere.</h2>
+      <p class="agency-sub">AI search, Google, maps, directories, your own booking page — it's one connected system, and we set it all up for you. You didn't go independent to become a part-time marketer.</p>
       <div class="agency-cta-row">
-        <a id="agencyCta" class="btn gold" target="_blank" rel="noopener">Book a free 15-minute call</a>
+        <a id="visAgencyCta" class="btn gold" target="_blank" rel="noopener">Book a free 15-minute call</a>
         <span class="agency-alt">or email <span class="agency-addr"></span></span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section id="faq" class="step">
-  <div class="wrap">
-    <div class="step-head">
-      <span class="step-num">?</span>
-      <div><h2>FAQ</h2><p>Quick answers before you trust the numbers.</p></div>
-    </div>
-    <div class="card faq-card">
-      <details>
-        <summary>Do my numbers get sent anywhere?</summary>
-        <p>No. Everything happens inside this page in your browser. Your answers are only saved on your own device, and pressing "Start over" at the bottom wipes them away.</p>
-      </details>
-      <details>
-        <summary>How do you know what each app charges?</summary>
-        <p>They're typical prices, and apps change them now and then. Press "Show the fee numbers we used" in step 2 to see exactly what we counted, and change anything that doesn't match what your app charges you.</p>
-      </details>
-      <details>
-        <summary>Fresha doesn't charge for bookings from my own page — do you know that?</summary>
-        <p>Bookings marked as direct, own link, website, walk-in, phone, WhatsApp, Instagram or referral are counted as "Booked direct" — no app takes a cut of those. Bookings marked Fresha or Treatwell are counted under that app. You'll see the split in the table.</p>
-      </details>
-      <details>
-        <summary>What's a no-show?</summary>
-        <p>A no-show is someone who booked but never came. If your list marks them (like "No show"), we leave them out of your earnings and show you how much they cost you instead.</p>
-      </details>
-      <details>
-        <summary>My app isn't in the list — can I still use this?</summary>
-        <p>Yes. Tick <strong>Another app</strong> in step 1, type your bookings for it, and tell us what it charges in step 2.</p>
-      </details>
-      <details>
-        <summary>Why look at the year and not just the month?</summary>
-        <p>Fees feel small because they come out bit by bit. Add up a whole year and it's often thousands. Run your numbers above and see what a year of fees could buy instead — a holiday, a new chair, or a big advertising budget.</p>
-      </details>
     </div>
   </div>
 </section>
@@ -486,24 +158,11 @@
 
 <footer>
   <div class="wrap footer-inner">
-    <p><strong>Booking Fee Analyser</strong> — a free tool by <span id="footBrand"></span>. No signup, no data leaves your device.</p>
-    <p>Estimates only, not financial advice. Fee rates change — verify with your provider before making decisions.</p>
-    <button id="resetBtn" class="btn ghost small">Start over (wipe saved inputs)</button>
+    <p><strong>Booking Fee Analyser</strong> — free tools by <span id="footBrand"></span>. No signup, no data leaves your device.</p>
+    <button id="resetBtn" class="btn ghost small" type="button">Start over</button>
   </div>
 </footer>
 
-<!-- ============ INSTALL GUIDE MODAL ============ -->
-<div id="installModal" class="modal-overlay" hidden>
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="installTitle">
-    <button class="modal-close" id="installClose" type="button" aria-label="Close">&times;</button>
-    <p class="install-eyebrow">Takes 10 seconds</p>
-    <h3 id="installTitle">Put the Fee Analyser on your home screen</h3>
-    <p class="install-sub">It'll sit on your phone like a real app — one tap and your numbers are there, any time.</p>
-    <ol class="install-steps" id="installSteps"></ol>
-    <p class="install-note" id="installNote"></p>
-  </div>
-</div>
-
-<script src="app.js"></script>
+<script src="visibility.js"></script>
 </body>
 </html>

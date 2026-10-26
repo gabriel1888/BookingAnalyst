@@ -566,7 +566,15 @@ footer { border-top: 1px solid var(--line); margin-top: 64px; padding: 32px 0 44
   .step-head h2 { font-size: 26px; }
 }
 @media (max-width: 640px) {
-  .nav-links { display: none; }
+  .nav-inner { flex-wrap: wrap; height: auto; padding-top: 10px; }
+  .nav-right { margin-left: auto; }
+  .nav-links {
+    display: flex; order: 3; width: 100%;
+    gap: 18px; padding: 9px 0 11px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  .nav-links a { font-size: 13.5px; white-space: nowrap; }
+  .step { scroll-margin-top: 104px; }
   .hero { padding: 56px 0 36px; }
   .hero-trust div { min-width: 135px; flex: 1; }
   .hide-sm { display: none; }
