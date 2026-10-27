@@ -15,7 +15,7 @@ const QUESTIONS = [
       how: 'Go to google.com/business, claim your salon, and fill in photos, opening hours, services and prices. Free, and about 20 minutes.' } },
   { id: 'freshReviews', text: 'Do you have Google reviews from the last 30 days?',
     fix: { title: 'Get 2–3 fresh Google reviews',
-      why: 'AI and Google both read review freshness as a signal of a busy, good salon. Reviews older than a few months stop counting in your favour.',
+      why: 'Recent genuine reviews help show customers — and AI — that you are busy and open now. They work alongside your overall review history.',
       how: 'Ask your three happiest customers this week: "Could you leave us a quick Google review? It really helps." Send them the link from your profile.' } },
   { id: 'replyReviews', text: 'Do you reply to your Google reviews?',
     fix: { title: 'Reply to every Google review',
@@ -39,7 +39,7 @@ const QUESTIONS = [
       how: 'Post three times this week: a recent result, a behind-the-scenes, and an open slot. Then twice a week keeps it warm.' } },
   { id: 'bookingLink', text: 'Can someone book you in one tap (link in your profiles/bio)?',
     fix: { title: 'Make booking one tap away',
-      why: 'Every extra step loses roughly half the people. If finding your booking link takes effort, they book someone else.',
+      why: 'Extra booking steps can create drop-off. If finding your booking link takes effort, some people give up and book elsewhere.',
       how: 'Put your booking link at the top of your Instagram bio, Facebook page and Google profile. Test it on a friend\'s phone.' } },
   { id: 'pricesPublic', text: 'Are your prices written down somewhere public?',
     fix: { title: 'Publish your prices',
@@ -68,6 +68,10 @@ function loadVisState() {
     const raw = localStorage.getItem(VIS_KEY);
     if (raw) state = { ...defaultVisState(), ...JSON.parse(raw) };
     answers = state.answers || {};
+    for (const k of Object.keys(answers)) {           // migrate pre-v2 boolean answers
+      if (answers[k] === true) answers[k] = 'yes';
+      else if (answers[k] === false) answers[k] = 'no';
+    }
     score = state.score;
   } catch { /* start fresh */ }
 }
@@ -101,8 +105,9 @@ function renderQuiz() {
     <div class="quiz-q" data-q="${q.id}">
       <p class="quiz-text"><span class="quiz-n">${i + 1}.</span> ${esc(q.text)}</p>
       <div class="q-btns" role="group" aria-label="${esc(q.text)}">
-        <button type="button" class="q-btn${answers[q.id] === true ? ' yes' : ''}" data-v="1" aria-pressed="${answers[q.id] === true}">Yes</button>
-        <button type="button" class="q-btn${answers[q.id] === false ? ' no' : ''}" data-v="0" aria-pressed="${answers[q.id] === false}">No / not sure</button>
+        <button type="button" class="q-btn${answers[q.id] === true ? ' yes' : ''}" data-v="yes" aria-pressed="${answers[q.id] === true}">Yes</button>
+        <button type="button" class="q-btn${answers[q.id] === false ? ' no' : ''}" data-v="no" aria-pressed="${answers[q.id] === false}">No</button>
+        <button type="button" class="q-btn${answers[q.id] === 'ns' ? ' ns' : ''}" data-v="ns" aria-pressed="${answers[q.id] === 'ns'}">Not sure</button>
       </div>
     </div>`).join('');
   updateProgress();
@@ -111,6 +116,8 @@ function renderQuiz() {
 function updateProgress() {
   const done = QUESTIONS.filter(q => answers[q.id] !== undefined).length;
   $('#quizProgress').style.width = (done / QUESTIONS.length * 100) + '%';
+  const bar = document.querySelector('.quiz-progress');
+  if (bar) bar.setAttribute('aria-valuenow', String(done));
   const btn = $('#scoreBtn');
   if (done === QUESTIONS.length) {
     btn.disabled = false;
@@ -122,14 +129,14 @@ function updateProgress() {
 }
 
 function scoreQuiz() {
-  return QUESTIONS.reduce((sum, q) => sum + (answers[q.id] === true ? 10 : 0), 0);
-}
+  return QUESTIONS.reduce((sum, q) => sum + (answers[q.id] === 'yes' ? 10 : 0), 0);
+}  // 'no' and 'not sure' both score 0
 
 function tierFor(score) {
   if (score >= 80) return { tier: 'Easy to find — you\'re the safe recommendation', blurb: 'AI and Google have plenty to work with. Keep the reviews fresh and the photos coming, and you\'ll stay the default answer in your town.' };
   if (score >= 50) return { tier: 'Partly visible — a few fixes will move the needle', blurb: 'You exist online, but there are gaps where AI and Google quietly skip you. The good news: everything missing is free or cheap to fix, and fast.' };
-  if (score >= 20) return { tier: 'Hard to find — you\'re losing customers you never see', blurb: 'When someone asks AI for a salon near them, you\'re not in the conversation. Each gap below is sending people to other salons — and they\'re all fixable.' };
-  return { tier: 'Invisible to AI — this needs urgent attention', blurb: 'Right now, when someone asks AI or searches Google, your salon effectively doesn\'t exist. The fixes below are free and start working within days. Do the first one today.' };
+  if (score >= 20) return { tier: 'Hard to find — you\'re missing out on new customers', blurb: 'When someone asks AI for a salon near them, you\'re not in the conversation. Each gap below is sending people to other salons — and they\'re all fixable.' };
+  return { tier: 'Key basics missing — start with these first', blurb: 'Right now, when someone asks AI or searches Google, your salon effectively doesn\'t exist. Many of these are low-cost improvements — results vary, but they all add up. Do the first one today.' };
 }
 
 function renderResult() {
@@ -141,7 +148,7 @@ function renderResult() {
   $('#scoreBar').style.width = score + '%';
   $('#scoreBar').style.background = score >= 80 ? 'var(--accent)' : (score >= 50 ? 'var(--gold)' : 'var(--cost)');
 
-  const fixes = QUESTIONS.filter(q => answers[q.id] === false).slice(0, 3);
+  const fixes = QUESTIONS.filter(q => answers[q.id] === 'no' || answers[q.id] === 'ns').slice(0, 3);
   $('#fixList').innerHTML = fixes.map((q, i) => `
     <div class="fix-card">
       <h4>${i + 1}. ${esc(q.fix.title)}</h4>
@@ -171,9 +178,10 @@ function bindEvents() {
     const btn = e.target.closest('.q-btn');
     if (!btn) return;
     const q = btn.closest('[data-q]').dataset.q;
-    answers[q] = btn.dataset.v === '1';
-    btn.parentElement.querySelectorAll('.q-btn').forEach(b => { b.classList.remove('yes', 'no'); b.setAttribute('aria-pressed', 'false'); });
-    btn.classList.add(answers[q] ? 'yes' : 'no');
+    const v = btn.dataset.v;                       // 'yes' | 'no' | 'ns'
+    answers[q] = v;
+    btn.parentElement.querySelectorAll('.q-btn').forEach(b => { b.classList.remove('yes', 'no', 'ns'); b.setAttribute('aria-pressed', 'false'); });
+    btn.classList.add(v === 'yes' ? 'yes' : v === 'no' ? 'no' : 'ns');
     btn.setAttribute('aria-pressed', 'true');
     updateProgress();
     saveVisState();
@@ -183,6 +191,7 @@ function bindEvents() {
     renderResult();
     $('#result').hidden = false;
     $('#result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $('#scoreTier').focus({ preventScroll: true });
   });
 
   $('#quizReset').addEventListener('click', () => {
@@ -208,7 +217,7 @@ function bindEvents() {
         email: $('#visEmail').value.trim(),
         score,
         tier: tierFor(score).tier,
-        answers: QUESTIONS.map(q => ({ question: q.text, answer: answers[q.id] === true ? 'yes' : 'no' })),
+        answers: QUESTIONS.map(q => ({ question: q.text, answer: answers[q.id] === true ? 'yes' : (answers[q.id] === 'ns' ? 'not_sure' : 'no') })),
         fixes: QUESTIONS.filter(q => answers[q.id] === false).slice(0, 3).map(q => q.fix.title),
         consent: $('#visConsent').checked,
         submittedAt: new Date().toISOString(),
