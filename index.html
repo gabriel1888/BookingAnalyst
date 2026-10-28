@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Booking Fee Analyser — what do Fresha, Treatwell & co. really cost you?</title>
+<title>Booking Analyst — what do Fresha, Treatwell & co. really cost you?</title>
 <meta name="description" content="Paste your monthly or weekly booking rundown from Fresha, Treatwell, Booksy or any platform. See exactly what you pay in commissions, card fees and subscriptions — and get a personalised action plan to cut it.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e7c66'/%3E%3Ctext x='16' y='22' font-family='Arial' font-size='16' font-weight='bold' fill='%23fff' text-anchor='middle'%3E%25%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
-<meta name="theme-color" content="#0e7c66">
+<meta name="theme-color" content="#111111">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Fee Analyser">
@@ -30,8 +30,8 @@
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#">
-      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0e7c66"/><text x="16" y="22" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">%</text></svg>
-      <span><span class="brand-long">Booking </span><em>Fee</em> Analyser</span>
+      <img class="brand-logo" src="logo.png" alt="Booking Analyst">
+      <span><span class="brand-long">Booking </span>Analyst</span>
     </a>
     <nav class="nav-links">
       <a href="#data" class="nav-flow">Start</a>
@@ -55,25 +55,41 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="wrap">
-    <p class="hero-eyebrow">Free · takes 2 minutes · nothing to install</p>
+  <div class="wrap hero-grid">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Free, and it takes about 2 minutes</p>
     <h1>How much do your booking apps <em>take</em> from you?</h1>
-    <p class="hero-sub">Tell us about your month. We'll show you exactly how much Fresha, Treatwell and the rest keep — and the simple things to do to keep that money yourself.</p>
+    <p class="hero-sub">Tell us about your month. We'll show you exactly how much Fresha, Treatwell and the rest keep, and the simple things that keep more of it yourself.</p>
     <div class="hero-chips">
       <span class="chip">Fresha</span><span class="chip">Treatwell</span><span class="chip">Booksy</span>
       <span class="chip">Planity</span><span class="chip">Square</span><span class="chip">Vagaro</span>
       <span class="chip">GlossGenius</span><span class="chip">StyleSeat</span><span class="chip chip-more">+ any platform</span>
     </div>
     <div class="hero-cta">
-      <a href="#data" class="btn primary btn-lg">Analyse my fees — free</a>
-      <p class="hero-cta-note">Takes under 2 minutes · your numbers stay in this browser</p>
+      <br>
+      <a href="#data" class="btn primary btn-lg">Analyse my fees for free</a>
+      <br>
+      <p class="hero-cta-note">Takes under 2 minutes, and your numbers stay in this browser.</p>
     </div>
-    <div class="hero-trust">
-      <div><strong>Private</strong><span>your numbers stay in this browser</span></div>
-      <div><strong>Free</strong><span>no account, no card</span></div>
-      <div><strong>Simple</strong><span>just 3 questions, plain answers</span></div>
-    </div>
+    <div class="hero-trust-line">Private and free. Nothing to install, and your numbers stay in this browser.</div>
     <div class="hero-switch">Don't use a booking app? <a href="visibility/">Check if AI can find your salon instead →</a></div>
+  </div>
+  <figure class="hero-chair">
+    <svg viewBox="0 0 400 520" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <g class="chair-draw">
+        <rect class="chair-line" pathLength="1" x="140" y="110" width="120" height="58" rx="16" style="--d:.05s"/>
+        <rect class="chair-line" pathLength="1" x="118" y="168" width="164" height="212" rx="22" style="--d:.15s"/>
+        <rect class="chair-line chair-thin" pathLength="1" x="136" y="190" width="128" height="168" rx="14" style="--d:.3s"/>
+        <rect class="chair-line" pathLength="1" x="100" y="380" width="200" height="44" rx="16" style="--d:.42s"/>
+        <path class="chair-line" pathLength="1" d="M100 376 c-10 -50 8 -116 26 -148" style="--d:.52s"/>
+        <path class="chair-line" pathLength="1" d="M300 376 c10 -50 -8 -116 -26 -148" style="--d:.58s"/>
+        <path class="chair-line" pathLength="1" d="M182 458 L190 424 L210 424 L218 458" style="--d:.68s"/>
+        <ellipse class="chair-accent" pathLength="1" cx="200" cy="470" rx="86" ry="15" style="--d:.78s"/>
+        <line class="chair-accent chair-thin" pathLength="1" x1="92" y1="500" x2="308" y2="500" style="--d:.9s"/>
+      </g>
+    </svg>
+    <figcaption class="chair-cap">The empty chair is the most expensive thing in your salon.</figcaption>
+  </figure>
   </div>
 </section>
 
@@ -84,7 +100,7 @@
       <span class="step-num">1</span>
       <div>
         <h2>Tell us about your month</h2>
-        <p>Three quick questions. Your answers stay on this page — nothing is sent anywhere.</p>
+        <p>Three quick questions. Your answers stay on this page. Nothing is sent anywhere.</p>
       </div>
     </div>
 
@@ -131,7 +147,7 @@
 
       <!-- CSV panel (optional) -->
       <div id="panelCsv" class="panel" hidden>
-        <p class="hint">Have a list of bookings from your app's reports page? Paste it here — we'll read it for you. Not sure how? Just use "Type it in" above instead.</p>
+        <p class="hint">Have a list of bookings from your app's reports page? Paste it here and we'll read it for you. Not sure how? Just use "Type it in" above instead.</p>
         <textarea id="csvInput" spellcheck="false" placeholder="Date, Client, Service, Source, Status, Price&#10;2026-10-01, Ana M, Blow dry, Treatwell, Paid, 45&#10;2026-10-02, Lee S, Massage, Fresha, Paid, 60&#10;2026-10-03, Kim T, Cut &amp; finish, Fresha (own link), Paid, 55&#10;…"></textarea>
         <div class="btn-row">
           <button id="analyseBtn" class="btn primary">Show me my numbers</button>
@@ -144,7 +160,7 @@
           <summary>Tips for pasting (optional)</summary>
           <ul>
             <li>Any list with prices works. If you can, add a <em>Source</em> column saying where each booking came from (Fresha, Treatwell, walk-in…).</li>
-            <li>Bookings that never happened — mark the Status "No show" or "Cancelled" and we'll leave them out.</li>
+            <li>Bookings that never happened: mark the Status "No show" or "Cancelled" and we'll leave them out.</li>
             <li>Short lines work too, like <code>45, Treatwell</code>.</li>
           </ul>
         </details>
@@ -166,7 +182,7 @@
             <input type="number" id="nsTicket" min="0" step="1" value="0">
           </label>
         </div>
-        <p class="disclaimer-note">The app fee numbers we use are typical ones — you can check and change them in step 2.</p>
+        <p class="disclaimer-note">The app fee numbers we use are typical ones. You can check and change them in step 2.</p>
       </details>
     </div>
   </div>
@@ -185,7 +201,7 @@
     <details class="adv-details rates-details">
       <summary>Show the fee numbers we used (optional)</summary>
       <div id="rateCards" class="rate-grid"><!-- filled by app.js --></div>
-      <p class="disclaimer-note">These are typical prices and they change now and then — check with your app to be sure.</p>
+      <p class="disclaimer-note">These are typical prices and they change now and then. Check with your app to be sure.</p>
     </details>
   </div>
 </section>
@@ -257,7 +273,7 @@
       <span class="step-num">5</span>
       <div>
         <h2>What if you ran your own booking page?</h2>
-        <p>For customers who book you directly, you don't need an app at all. Here's what it would cost — and what you'd keep.</p>
+        <p>For customers who book you directly, you don't need an app at all. Here's what it would cost, and what you'd keep.</p>
       </div>
     </div>
     <div class="card diy-card">
@@ -280,7 +296,7 @@
           <div class="big" id="diySaving"></div>
           <div class="sub" id="diySavingSub"></div>
         </div>
-        <p class="diy-note">Apps are still worth it for finding <em>new</em> customers — your own page is for the regulars. See the slider above for a realistic halfway number.</p>
+        <p class="diy-note">Apps are still worth it for finding <em>new</em> customers. Your own page is for the regulars, and the slider above shows a realistic halfway number.</p>
       </div>
     </div>
   </div>
@@ -307,12 +323,12 @@
       <span class="step-num">7</span>
       <div>
         <h2>Get found by more people</h2>
-        <p>Saving fees is half the story — here's how new people find you in the first place, on AI and in the app.</p>
+        <p>Saving fees is half the story. Here's how new people find you in the first place, on AI and in the app.</p>
       </div>
     </div>
     <div class="found-grid">
       <div class="found-card">
-        <h3>When people ask AI 💬</h3>
+        <h3>When people ask AI</h3>
         <p class="found-sub">More and more people ask ChatGPT or Google things like "where's a good hairdresser near me?" Here's how to be the answer:</p>
         <ol>
           <li>Claim and complete your <strong>Google Business Profile</strong> — photos, opening hours, services, prices.</li>
@@ -322,7 +338,7 @@
         </ol>
       </div>
       <div class="found-card">
-        <h3>Inside the Fresha app 📲</h3>
+        <h3>Inside the Fresha app</h3>
         <p class="found-sub">When someone searches in Fresha, they see a ranked list. You rank higher when you:</p>
         <ol>
           <li>Keep your profile <strong>complete with good photos</strong> — profiles with photos get booked far more.</li>
@@ -342,8 +358,8 @@
     <div class="saved-card">
       <div class="saved-head">
         <p class="saved-eyebrow">Your win</p>
-        <h2>Saved money? We'd love to hear.</h2>
-        <p class="saved-sub">If our numbers helped you keep a bit more of your money, tell us how much. We feature our favourite stories — only with your permission — and they help other salon owners take the leap.</p>
+        <h2>Already saved some money?</h2>
+        <p class="saved-sub">If our numbers helped you keep a bit more of your money, tell us how much. We feature our favourite stories (only with your permission), and they help other salon owners take the leap.</p>
       </div>
       <form id="savedForm">
         <input type="text" id="savedHp" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -392,7 +408,7 @@
       <div class="report-copy">
         <p class="report-eyebrow">We do it for you</p>
         <h2>A report in your inbox, every month</h2>
-        <p class="report-sub">Each month, we check what your apps charged you and send you a short, clear report: what changed, what crept up, and the 3 things to do this month to keep more money. Start with your first report free — no card needed.</p>
+        <p class="report-sub">Each month, we check what your apps charged you and send you a short, clear report: what changed, what crept up, and the 3 things to do this month to keep more money. Start with your first report free, no card needed.</p>
         <ul class="report-points">
           <li><strong>Every fee, written out</strong> — for every app you use</li>
           <li><strong>Month-by-month tracking</strong> — spot it straight away if an app starts taking more</li>
@@ -437,7 +453,7 @@
       <div class="agency-points">
         <div><strong>Your own booking page</strong><span>A simple page where customers book you directly — no app taking a cut.</span></div>
         <div><strong>Messages that bring people back</strong><span>We remind your customers to rebook, so they become regulars who book direct.</span></div>
-        <div><strong>Being easy to find</strong><span>We help people nearby find you on Google — and book you directly.</span></div>
+        <div><strong>Being easy to find</strong><span>We help people nearby find you on Google, and book you directly.</span></div>
       </div>
       <div class="agency-cta-row">
         <a id="agencyCta" class="btn gold" target="_blank" rel="noopener">Book a free 15-minute call</a>
@@ -477,7 +493,7 @@
       </details>
       <details>
         <summary>Why look at the year and not just the month?</summary>
-        <p>Fees feel small because they come out bit by bit. Add up a whole year and it's often thousands. Run your numbers above and see what a year of fees could buy instead — a holiday, a new chair, or a big advertising budget.</p>
+        <p>Fees feel small because they come out bit by bit. Add up a whole year and it's often thousands. Run your numbers above and see what a year of fees could buy instead: a holiday, a new chair, or a big advertising budget.</p>
       </details>
     </div>
   </div>
@@ -487,7 +503,7 @@
 
 <footer>
   <div class="wrap footer-inner">
-    <p><strong>Booking Fee Analyser</strong> — a free tool by <span id="footBrand"></span>. No signup; your answers stay in this browser unless you ask us for a report.</p>
+    <p><strong>Booking Analyst</strong> — a free tool by <span id="footBrand"></span>. No signup; your answers stay in this browser unless you ask us for a report.</p>
     <p>Estimates only, not financial advice. Fee rates change — verify with your provider before making decisions.</p>
     <button id="resetBtn" class="btn ghost small">Start over (wipe saved inputs)</button>
   </div>

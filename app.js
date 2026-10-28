@@ -626,7 +626,7 @@ function renderDiy() {
   if (appTake < 1) {
     $('#diyToday').textContent = fmt(0) + ' / month';
     $('#diyCost').textContent = 'about ' + fmt(diyCost) + ' / month';
-    $('#diySaving').textContent = 'You already run on your own bookings 🎉';
+    $('#diySaving').textContent = 'You already run on your own bookings. ';
     $('#diySavingSub').textContent = 'Nothing here for the apps to take — nice one.';
     return;
   }
@@ -637,7 +637,7 @@ function renderDiy() {
   $('#diySavingSub').textContent = fmt(save * 12) + ' a year if all your regulars book direct';
 }
 
-const DIRECT_TEMPLATE = `Hi {name}! Thanks for coming today! Next time, just message me here to book — same times, and my regulars get first pick of slots.`;
+const DIRECT_TEMPLATE = `Hi {name}! Thanks for coming today! Next time, just message me here to book. Same times, and my regulars get first pick of slots.`;
 
 function renderActions() {
   const conv = state.sim.conv, disc = state.sim.disc;
@@ -648,9 +648,9 @@ function renderActions() {
     acts.push({
       cls: '', tag: ['quick', 'Do this first'],
       title: 'Ask your app customers to book with you directly',
-      body: `Here's the trick the apps don't tell you: they only charge you for <strong>finding</strong> a customer. If that customer comes back and books you directly — a quick message instead of the app — the app gets nothing. Today, ${fmtPct(calc.marketplaceShare * 100, 0)} of your money comes through apps that take a cut.`,
+      body: `Here's the trick the apps don't tell you: they only charge you for <strong>finding</strong> a customer. If that customer comes back and books you directly (a quick message instead of the app), the app gets nothing. Today, ${fmtPct(calc.marketplaceShare * 100, 0)} of your money comes through apps that take a cut.`,
       steps: [
-        'At the end of each visit, say: "Next time, just message me to book — here\'s my number."',
+        'At the end of each visit, say: "Next time, just message me to book. Here\'s my number."',
         'The day after their visit, send the message below. It takes 20 seconds.',
         'If they say yes, that customer stops costing you fees — forever.',
       ],
@@ -664,10 +664,10 @@ function renderActions() {
     acts.push({
       cls: 'rank2', tag: ['medium', 'This week'],
       title: 'Charge app customers a little more',
-      body: `You don't have to accept the fee. If an app keeps 25p of every £1, simply charge £133 instead of £100 <em>on that app only</em> — you end up with the same money. Your direct customers keep paying the normal, lower price.`,
+      body: `You don't have to accept the fee. If an app keeps 25p of every £1, simply charge £133 instead of £100 <em>on that app only</em>, and you end up with the same money. Your direct customers keep paying the normal, lower price.`,
       steps: [
         'Look at your prices on the app. Add about a quarter (a third if the app takes 30p in the pound).',
-        'Keep your direct and walk-in prices where they are — that quietly rewards people who book direct.',
+        'Keep your direct and walk-in prices where they are. That quietly rewards people who book direct.',
       ],
       saving: recover, savingNote: 'extra money each month, from the same bookings',
     });
@@ -691,7 +691,7 @@ function renderActions() {
     acts.push({
       cls: 'rank3', tag: ['quick', '5 minutes'],
       title: 'Send reminders by WhatsApp or email instead of paid texts',
-      body: `You're paying about ${fmt(calc.totalSms)} a month for reminder texts. Your app can send the same reminders by WhatsApp or email for free — and people read them just as much.`,
+      body: `You're paying about ${fmt(calc.totalSms)} a month for reminder texts. Your app can send the same reminders by WhatsApp or email for free, and people read them just as much.`,
       steps: [
         'In your app\'s settings, find "reminders" and switch from text message to WhatsApp or email.',
         'Tell your regulars: "Message me on WhatsApp and you\'ll get reminders free."',
@@ -714,7 +714,7 @@ function renderActions() {
   acts.push({
     cls: 'unquantified', tag: ['long', 'Later'],
     title: 'Sell bundles of visits, paid up front',
-    body: 'Sell 4 or 6 visits together for a small discount, paid in advance, booked directly with you. The customer wins (cheaper), you win (no fees, and they always come back).',
+    body: 'Sell 4 or 6 visits together for a small discount, paid in advance, booked directly with you. The customer wins because it is cheaper. You win because there are no fees, and they always come back.',
     steps: [
       'Pick your most common service. Offer 4 visits for the price of 3 and a bit.',
       'Only offer it to people who pay you directly and book directly.',
@@ -736,7 +736,7 @@ function renderActions() {
           <br><button class="btn ghost small copy-btn" data-template="1">Copy message</button>
         </div>` : ''}
       ${a.saving != null ? `
-        <div class="save"><strong>You keep ${fmt(a.saving)} more every month</strong> — ${a.savingNote}.<br>
+        <div class="save"><strong>You keep ${fmt(a.saving)} more every month</strong> (${a.savingNote}).<br>
         <span style="font-weight:500">That's ${fmt(a.saving * 12)} over a year.</span></div>` : `
         <div class="save muted-save">This one saves different amounts for everyone — but it always saves.</div>`}
     </div>`).join('');
@@ -1079,7 +1079,7 @@ function bindEvents() {
   // Share — native share sheet where available, copy-link otherwise
   $('#shareBtn').addEventListener('click', async () => {
     const btn = $('#shareBtn');
-    const data = { title: 'Booking Fee Analyser', text: 'See what Fresha, Treatwell & co. really cost your salon — free tool:', url: location.href };
+    const data = { title: 'Booking Analyst', text: 'See what Fresha, Treatwell & co. really cost your salon — free tool:', url: location.href };
     try {
       if (navigator.share) { await navigator.share(data); return; }
       await navigator.clipboard.writeText(location.href);
