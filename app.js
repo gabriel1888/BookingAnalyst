@@ -11,9 +11,9 @@ const BRAND_NAME = 'Fàs';                              // your brand, shown in 
 /* ================= Platform fee presets (editable, approximate Oct 2026) ================= */
 const PLATFORMS = [
   { id: 'fresha',      name: 'Fresha',       color: '#101828', commission: 20,   procPct: 2.19, procFixed: 0.49, sub: 0,    smsAllow: 100, smsCost: 0.08,
-    note: 'Free app. It keeps about 20p of every £1 from customers it finds you. Bookings from your own page cost nothing. Free texts each month, then a small charge.' },
+    note: 'New clients found on Fresha: about a 20% commission, once. Returning clients: 0%. Card fees and optional paid plans are separate. Free texts monthly, then a small charge.' },
   { id: 'treatwell',   name: 'Treatwell',    color: '#E6007E', commission: 25,   procPct: 0,    procFixed: 0,    sub: 0,    smsAllow: 0,   smsCost: 0,
-    note: 'It keeps a share of every customer it finds you — often 15 to 30p in the pound. It usually collects the money and passes it on to you.' },
+    note: 'UK plans: new marketplace clients pay commission (often 15–30%), repeat bookings 0%. It usually collects payment and passes it on. Other charges may apply.' },
   { id: 'booksy',      name: 'Booksy',       color: '#1D6FF2', commission: 0,    procPct: 1.99, procFixed: 0.20, sub: 29.99, smsAllow: 0,   smsCost: 0.09,
     note: 'You pay a fixed price every month, plus a small fee when a customer pays by card.' },
   { id: 'planity',     name: 'Planity',      color: '#7C3AED', commission: 20,   procPct: 0,    procFixed: 0,    sub: 49,   smsAllow: 0,   smsCost: 0,
@@ -257,7 +257,12 @@ function aggregate() {
       if (!state.channels.includes(id)) continue;   // deselected channels don't count
       const count = parseFloat(q.count) || 0;
       const avg = parseFloat(q.avg) || 0;
-      if (count > 0) chans[id] = { count: count * f, revenue: count * avg * f };
+      if (count > 0) {
+        const newShare = (q.new !== undefined && q.new !== '' && Number.isFinite(parseFloat(q.new)))
+          ? clamp(parseFloat(q.new) / count, 0, 1)
+          : 1;   // blank = treat all as new clients (commissioned)
+        chans[id] = { count: count * f, revenue: count * avg * f, frac: newShare };
+      }
     }
     nsCount = (parseFloat(state.nsCount) || 0) * f;
     nsRevenue = nsCount * (parseFloat(state.nsTicket) || 0);
@@ -275,10 +280,10 @@ function aggregate() {
   return { chans, totalRevenue, totalBookings, nsCount, nsRevenue, cancelled, marketplaceShare: totalRevenue > 0 ? marketplaceRevenue / totalRevenue : 0 };
 }
 
-function feeBreakdown(id, revenue, count, active) {
+function feeBreakdown(id, revenue, count, active, frac = 1) {
   const r = rateOf(id);
   const cs = clamp(state.cardShare, 0, 100) / 100;
-  const commission = revenue * (r.commission / 100);
+  const commission = revenue * frac * (r.commission / 100);
   const card = revenue * cs * (r.procPct / 100) + count * cs * r.procFixed;
   // SMS reminders: charged per message once the monthly free allowance is used up
   const smsCount = active ? Math.max(0, count * (state.smsPerBooking || 0) - r.smsAllow) : 0;
@@ -292,7 +297,7 @@ function computeAll() {
   const rows = [];
   let totalFees = 0, totalCommission = 0, totalCard = 0, totalSms = 0, totalSub = 0;
   for (const [id, c] of Object.entries(agg.chans)) {
-    const fees = feeBreakdown(id, c.revenue, c.count, true);
+    const fees = feeBreakdown(id, c.revenue, c.count, true, c.frac);
     rows.push({ id, ...c, ...fees, feePct: c.revenue > 0 ? fees.total / c.revenue * 100 : 0 });
     totalFees += fees.total; totalCommission += fees.commission; totalCard += fees.card; totalSms += fees.sms; totalSub += fees.sub;
   }
@@ -485,11 +490,12 @@ function buildQuickTable() {
   $('#quickTable tbody').innerHTML = activeChannels().map(p => `
     <tr data-quick="${p.id}">
       <td><span class="dot" style="background:${p.color}"></span>${p.name}</td>
-      <td><input type="number" min="0" step="1" data-q="count" placeholder="0"></td>
-      <td><input type="number" min="0" step="1" data-q="avg" placeholder="${state.currency}0"></td>
-      <td class="ta-r quick-rev">—</td>
+      <td data-label="Bookings"><input type="number" min="0" step="1" data-q="count" placeholder="0"></td>
+      <td data-label="New clients (first time)"><input type="number" min="0" step="1" data-q="new" placeholder="all"></td>
+      <td data-label="Usual price"><input type="number" min="0" step="1" data-q="avg" placeholder="${state.currency}0"></td>
+      <td class="ta-r quick-rev" data-label="Money in">—</td>
     </tr>`).join('') + `
-    <tr class="quick-total-row"><td>Total</td><td></td><td></td><td class="ta-r" id="quickRevenueCell">—</td></tr>`;
+    <tr class="quick-total-row"><td>Total</td><td></td><td></td><td></td><td class="ta-r" id="quickRevenueCell">—</td></tr>`;
   restoreQuickInputs();
   renderQuickTotals();
 }
@@ -516,15 +522,15 @@ function renderQuickTotals() {
   const cell = $('#quickRevenueCell');
   if (cell) cell.textContent = total > 0 ? fmt(total) : '—';
   const p = $('#quickTotal');
-  if (p) p.textContent = total > 0 ? `That's ${fmt(total)} coming in per ${state.period === 'weekly' ? 'week' : 'month'}. Now press the green button below to see your numbers.` : '';
+  if (p) p.textContent = total > 0 ? `That's ${fmt(total)} coming in per ${state.period === 'weekly' ? 'week' : 'month'}. Your numbers appear below as you type.` : '';
 }
 
 function renderKpis() {
   const money = (raw) => ({ value: fmt(raw), raw, dec: 0, pre: state.currency, suf: '' });
   const kpis = [
     { label: `Money you made`, ...money(calc.totalRevenue), sub: `${calc.totalBookings.toFixed(0)} bookings` },
-    { label: 'The apps took', ...money(calc.totalFees), sub: 'their fees, every month', cls: 'cost' },
-    { label: `Of every ${state.currency}100 you earn`, value: state.currency + calc.effectivePct.toFixed(2), raw: calc.effectivePct, dec: 2, pre: state.currency, suf: '', sub: 'goes to the apps', cls: 'cost' },
+    { label: 'Booking & payment costs', ...money(calc.totalFees), sub: 'commission, card fees and extras, every month', cls: 'cost' },
+    { label: `Of every ${state.currency}100 you earn`, value: state.currency + calc.effectivePct.toFixed(2), raw: calc.effectivePct, dec: 2, pre: state.currency, suf: '', sub: 'is booking & payment costs', cls: 'cost' },
     { label: 'Every year, they take', ...money(calc.totalFees * 12), sub: '12 months of fees added up', cls: 'cost' },
   ];
   if (calc.nsRevenue > 0) {
@@ -596,6 +602,8 @@ function renderChannelTable() {
   }).join('');
 
   $('#assumptionsList').innerHTML = `
+    <li>Commission counts only for the share of each app's bookings you marked as new clients (quick add). In paste mode it counts for all app bookings, so adjust the % in step 2 to match your statement.</li>
+    <li>Commission rules last checked October 2026 (UK). Platforms change their pricing often.</li>
     <li>Weekly numbers were turned into monthly ones (4 weeks and a bit more) so everything compares fairly.</li>
     <li>Card fees are counted on ${clamp(state.cardShare, 0, 100)}% of the money, because that's the share you set as paid by card.</li>
     <li>Text reminders: each app gives some free ones a month; after that each text costs a little — that's counted too.</li>
@@ -611,7 +619,7 @@ function renderSim() {
   const { saved } = conversionSaving(conv, disc);
   const after = calc.totalFees - saved;
   $('#simResult').innerHTML = `
-    <div class="sim-line"><span>What the apps take today</span><strong>${fmt(calc.totalFees)} / month</strong></div>
+    <div class="sim-line"><span>Booking & payment costs today</span><strong>${fmt(calc.totalFees)} / month</strong></div>
     <div class="sim-line"><span>What they'd take after the change</span><strong>${fmt(after)} / month</strong></div>
     <div class="sim-saving">
       <div class="big">You keep ${fmt(saved)} more, every month</div>
@@ -661,13 +669,18 @@ function renderActions() {
 
   const recover = repriceRecover();
   if (recover > 0) {
+    let mRev = 0, wComm = 0;
+    calc.rows.forEach(r => { const rc = rateOf(r.id).commission; if (rc > 0) { mRev += r.revenue; wComm += r.revenue * rc / 100; } });
+    const wc = Math.round(wComm / mRev * 100);
+    const fair = Math.round(100 / (1 - wc / 100));
     acts.push({
       cls: 'rank2', tag: ['medium', 'This week'],
       title: 'Charge app customers a little more',
-      body: `You don't have to accept the fee. If an app keeps 25p of every £1, simply charge £133 instead of £100 <em>on that app only</em>, and you end up with the same money. Your direct customers keep paying the normal, lower price.`,
+      body: `You don't have to accept the fee. Your app bookings carry about ${wc}% commission, so price that service at about ${fmt(fair)} on that app instead of ${fmt(100)} <em>on that app only</em>, and you keep the same money. Your direct customers keep paying the normal, lower price.`,
       steps: [
-        'Look at your prices on the app. Add about a quarter (a third if the app takes 30p in the pound).',
+        `On that app only, divide your normal price by (1 - ${wc}/100). At ${wc}% that means multiplying by about ${(100 / (100 - wc)).toFixed(2)}.`,
         'Keep your direct and walk-in prices where they are. That quietly rewards people who book direct.',
+        'This assumes people keep booking at the higher price, so watch a month and adjust. Check your platform agreement too.',
       ],
       saving: recover, savingNote: 'extra money each month, from the same bookings',
     });
